@@ -19,6 +19,9 @@ type PropsTypeToDoList = {
 }
 
 function ToDoList(props: PropsTypeToDoList) {
+
+// function
+
     const addTask = (title:string) => {
         props.addTask(title, props.id)
     }
@@ -27,11 +30,15 @@ function ToDoList(props: PropsTypeToDoList) {
         props.changeTodoListTitle(title, props.id)
     }
 
+    const removeTodoList = () => props.removeTodoList(props.id)
+
+// JSX
+
     return (
         <div>
             <h3>
                 <EditableSpan title={props.title} changeValue={changeTodoListTitle} />
-                <button onClick={() => props.removeTodoList(props.id)}>X</button>
+                <button onClick={removeTodoList}>X</button>
             </h3>
 
             <AddItemForm addItem={addTask}/>
@@ -44,14 +51,18 @@ function ToDoList(props: PropsTypeToDoList) {
                             props.changeTaskTitle(task.id, newValue, props.id)
                         }
 
-
                         return (
                             <li key={task.id} className={task.isDone ? 'is-done' : '' }>
-                                <input type="checkbox" checked={task.isDone} onChange={(e) => {props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)}}/>
-                                <EditableSpan title={task.title} changeValue={changeTaskTitle} />
-                                <button onClick={() => {
-                                    props.removeTask(task.id, props.id)
-                                }}>X
+                                <input type="checkbox"
+                                       checked={task.isDone}
+                                       onChange={(e) => {props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)}}
+                                />
+                                <EditableSpan
+                                    title={task.title}
+                                    changeValue={changeTaskTitle}
+                                />
+                                <button
+                                    onClick={() => {props.removeTask(task.id, props.id)}}>X
                                 </button>
                             </li>
                         )

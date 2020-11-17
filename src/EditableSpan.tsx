@@ -7,12 +7,17 @@ type EditableSpanType = {
 
 function EditableSpan(props: EditableSpanType) {
 
+// state
+
     const [editMode, setEditMode] = useState<boolean>(false)
-    const [title, setTitle] = useState <string> (props.title)
+    const [title, setTitle] = useState<string>(props.title)
+
+// function
+
     const activatedEditMode = () => {
         setEditMode(true)
     }
-    const deActivatedEditMode = () =>{
+    const deActivatedEditMode = () => {
         setEditMode(false)
         props.changeValue(title)
     }
@@ -20,15 +25,16 @@ function EditableSpan(props: EditableSpanType) {
         setTitle(event.currentTarget.value)
     }
 
+// JSX
 
-    return(
+    return (
         editMode
             ? <input value={title} onBlur={deActivatedEditMode} autoFocus={true}
 
-            onChange={changeTitle}
+                     onChange={changeTitle}
             />
             : <span onDoubleClick={activatedEditMode}>{props.title}</span>
-        )
+    )
 }
 
 export default EditableSpan;

@@ -5,15 +5,22 @@ type AddItemFormType = {
 
 }
 
-function  AddItemForm(props: AddItemFormType) {
-    const [title, setTitle] = useState <string> ('')
-    const [error, setError] = useState <string | null> (null)
+function AddItemForm(props: AddItemFormType) {
+
+// state
+
+    const [title, setTitle] = useState<string>('')
+    const [error, setError] = useState<string | null>(null)
+
+// function
 
     const onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-        setTitle(event.currentTarget.value) }
+        setTitle(event.currentTarget.value)
+    }
 
     const onKeyDownAddItem = (event: KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === 'Enter') addItem() }
+        if (event.key === 'Enter') addItem()
+    }
 
     const addItem = () => {
         const trimmedTitle = title.trim()
@@ -22,19 +29,20 @@ function  AddItemForm(props: AddItemFormType) {
             setTitle("")
         } else {
             setError('Title is required!')
-
         }
         setTitle("")
     }
 
-    return(
+// JSX
+
+    return (
         <div>
             <input
                 value={title}
                 onChange={onTitleChangeHandler}
                 onKeyPress={onKeyDownAddItem}
                 className={error ? 'error' : ''}
-                />
+            />
 
             <button onClick={addItem}>+</button>
 
