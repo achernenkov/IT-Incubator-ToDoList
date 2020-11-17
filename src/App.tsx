@@ -9,6 +9,8 @@ export type TasksType = {
     isDone: boolean
 }
 
+// Comment
+
 export type FilterValuesType = "all" | "active" | "completed"
 
 type TodoListType = {
