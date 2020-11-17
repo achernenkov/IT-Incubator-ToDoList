@@ -44,5 +44,3 @@ function  AddItemForm(props: AddItemFormType) {
 }
 
 export default AddItemForm;
-
-// import разный.

@@ -77,19 +77,22 @@ function App() {
         setTasks({...tasks})
     }
 
-    // let tasksForTodoList = tasks
-    // if(filter === "active"){
-    //     tasksForTodoList = tasks.filter(task => task.isDone === false)
-    // }
-    // if(filter === "completed"){
-    //     tasksForTodoList = tasks.filter(task => task.isDone === true)
-    // }
 
     function changeTaskStatus(taskID:string, isDone: boolean, todoListID: string){
         const todoListTask = tasks[todoListID]
         const task: TasksType | undefined = todoListTask.find(task => task.id === taskID)
         if(task){
             task.isDone = isDone
+            setTasks({...tasks})
+        }
+    }
+
+
+    function changeTaskTitle(taskID:string, title: string, todoListID: string){
+        const todoListTask = tasks[todoListID]
+        const task: TasksType | undefined = todoListTask.find(task => task.id === taskID)
+        if(task){
+            task.title = title
             setTasks({...tasks})
         }
     }
@@ -133,6 +136,7 @@ function App() {
                         addTask={addTask}
                         changeTaskStatus={changeTaskStatus}
                         removeTodoList={removeTodoList}
+                        changeTaskTitle={changeTaskTitle}
                     />
                     )
                     }
