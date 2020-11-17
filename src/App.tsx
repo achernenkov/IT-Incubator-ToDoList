@@ -97,6 +97,14 @@ function App() {
         }
     }
 
+    function changeTodoListTitle(title: string, todoListID: string){
+        const todoList = todoLists.find(task => task.id === todoListID)
+        if(todoList){
+            todoList.title = title
+            setTodoLists([...todoLists])
+        }
+    }
+
     function addTodoList(title: string){
         const newTodoListID: string = v1()
         const newTodoList: TodoListType = {
@@ -137,6 +145,7 @@ function App() {
                         changeTaskStatus={changeTaskStatus}
                         removeTodoList={removeTodoList}
                         changeTaskTitle={changeTaskTitle}
+                        changeTodoListTitle={changeTodoListTitle}
                     />
                     )
                     }
