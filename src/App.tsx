@@ -2,14 +2,13 @@ import React, {useState} from 'react';
 import './App.css';
 import ToDoList from "./ToDoList";
 import {v1} from "uuid";
+import AddItemForm from "./AddItemForm";
 
 export type TasksType = {
     id: string
     title: string
     isDone: boolean
 }
-
-// Comment
 
 export type FilterValuesType = "all" | "active" | "completed"
 
@@ -41,7 +40,7 @@ function App() {
             {id: v1(), title: 'HTML/CSS', isDone: true},
             {id: v1(), title: 'JavaScript', isDone: true},
             {id: v1(), title: 'React', isDone: false},
-            {id: v1(), title: 'Redax', isDone: true},
+            {id: v1(), title: 'NodeJS', isDone: true},
         ],[todoListID2]: [
             {id: v1(), title: 'Dog', isDone: true},
             {id: v1(), title: 'Cat', isDone: true},
@@ -49,18 +48,6 @@ function App() {
             {id: v1(), title: 'Rabbit', isDone: true},
         ]
     })
-
-
-
-    // const [tasks, setTasks] = useState<Array<TasksType>>([
-    //     {id:v1(), title:'HTML/CSS', isDone: true},
-    //     {id:v1(), title:'JavaScript', isDone: true},
-    //     {id:v1(), title:'React', isDone: false},
-    //     {id:v1(), title:'Redax', isDone: true},
-    //     {id:v1(), title:'SaSS', isDone: false}
-    // ])
-    //
-    // const [filter, setFilter] = useState<FilterValuesType>("all")
 
     function removeTask(taskID: string, todoListID: string){
         const todoListTask = tasks[todoListID]
@@ -107,20 +94,31 @@ function App() {
         }
     }
 
+    function addTodoList(title: string){
+        const newTodoListID: string = v1()
+        const newTodoList: TodoListType = {
+            id: newTodoListID,
+            title: title,
+            filter: "all"
+        }
+        setTodoLists([...todoLists, newTodoList])
+        setTasks({...tasks, [newTodoListID]: []})
+    }
+
     return (
         <div className="App">
-
+            <AddItemForm addItem={addTodoList} />
             {
                 todoLists.map(tl => {
 
                     let tasksForTodoList = tasks[tl.id]
 
                     if(tl.filter === "active"){
-                        tasksForTodoList = tasks[tl.id].filter(task => task.isDone === false)
+                        tasksForTodoList = tasks[tl.id].filter(task => !task.isDone)
                     }
 
                     if(tl.filter === "completed"){
-                        tasksForTodoList = tasks[tl.id].filter(task => task.isDone === true)
+                        tasksForTodoList = tasks[tl.id].filter(task => task.isDone)
                     }
 
                     return(

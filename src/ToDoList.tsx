@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {TasksType, FilterValuesType} from './App'
 import './App.css';
+import AddItemForm from "./AddItemForm";
 
 type PropsTypeToDoList = {
     id: string
@@ -15,39 +16,16 @@ type PropsTypeToDoList = {
 }
 
 function ToDoList(props: PropsTypeToDoList) {
-
-    const [title, setTitle] = useState <string> ('')
-    const [error, setError] = useState <string | null> (null)
-
-    const addTask = () => {
-        const trimmedTitle = title.trim()
-        if (trimmedTitle !== '') {
-            props.addTask(trimmedTitle, props.id)
-            setTitle("")
-        } else {
-            setError('Title is required!')
-
-        }
-        setTitle("")
+    const addTask = (title:string) => {
+        props.addTask(title, props.id)
     }
-
 
     return (
         <div>
             <h3>{props.title}<button onClick={() => props.removeTodoList(props.id)}>X</button></h3>
-            <div>
-                <input value={title}
-                       onChange={(event) => {
-                           setTitle(event.currentTarget.value)
-                       }}
-                       onKeyPress={(event) => {
-                           if (event.key === 'Enter') addTask()
-                       }}
-                       className={error ? 'error' : ''}
-                />
-                <button onClick={addTask}>+</button>
-                {error && <div className={'error-message'}>{error}</div>}
-            </div>
+
+            <AddItemForm addItem={addTask}/>
+
             <ul>
                 {
                     props.tasks.map(task => {
