@@ -49,7 +49,7 @@ function ToDoList(props: PropsTypeToDoList) {
 
             <AddItemForm addItem={addTask}/>
 
-            <ul>
+            <ul style={{listStyle: 'none', padding: '0'}}>
                 {
                     props.tasks.map(task => {
 
