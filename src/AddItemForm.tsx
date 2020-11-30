@@ -55,11 +55,9 @@ function AddItemForm(props: AddItemFormType) {
                 label={'Title'}
                 helperText={error}
             />
-            {/*<button onClick={addItem}>+</button>*/}
             <IconButton onClick={addItem}>
                 <AddCircle/>
             </IconButton>
-            {/*{error && <div className={'error-message'}>{error}</div>}*/}
         </div>
     )
 }

@@ -32,11 +32,6 @@ function EditableSpan(props: EditableSpanType) {
         editMode
             ?
 
-            // ? <input value={title} onBlur={deActivatedEditMode} autoFocus={true}
-            //
-            //          onChange={changeTitle}
-            // />
-
             <TextField
                 variant={"outlined"}
                 value={title}

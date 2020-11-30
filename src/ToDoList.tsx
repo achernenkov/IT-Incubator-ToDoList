@@ -14,10 +14,10 @@ type PropsTypeToDoList = {
     addTask: (title: string, todoListID: string) => void
     removeTask: (taskID: string, todoListID: string) => void
     changeFilter: (newFilterValue: FilterValuesType, todoListID: string) => void
-    changeTaskStatus: (taskID:string, isDone:boolean, todoListID: string) => void
-    filter:FilterValuesType
+    changeTaskStatus: (taskID: string, isDone: boolean, todoListID: string) => void
+    filter: FilterValuesType
     removeTodoList: (todoListID: string) => void
-    changeTaskTitle: (taskID:string, title: string, todoListID: string) => void
+    changeTaskTitle: (taskID: string, title: string, todoListID: string) => void
     changeTodoListTitle: (title: string, todoListID: string) => void
 }
 
@@ -25,11 +25,11 @@ function ToDoList(props: PropsTypeToDoList) {
 
 // function
 
-    const addTask = (title:string) => {
+    const addTask = (title: string) => {
         props.addTask(title, props.id)
     }
 
-    const changeTodoListTitle = (title:string) => {
+    const changeTodoListTitle = (title: string) => {
         props.changeTodoListTitle(title, props.id)
     }
 
@@ -40,7 +40,7 @@ function ToDoList(props: PropsTypeToDoList) {
     return (
         <div>
             <h3>
-                <EditableSpan title={props.title} changeValue={changeTodoListTitle} />
+                <EditableSpan title={props.title} changeValue={changeTodoListTitle}/>
                 {/*<button onClick={removeTodoList}>X</button>*/}
                 <IconButton onClick={removeTodoList}>
                     <Delete/>
@@ -53,27 +53,28 @@ function ToDoList(props: PropsTypeToDoList) {
                 {
                     props.tasks.map(task => {
 
-                        const changeTaskTitle = (newValue:string) => {
+                        const changeTaskTitle = (newValue: string) => {
                             props.changeTaskTitle(task.id, newValue, props.id)
                         }
 
                         return (
-                            <li key={task.id} className={task.isDone ? 'is-done' : '' }>
+                            <li key={task.id} className={task.isDone ? 'is-done' : ''}>
                                 <Checkbox
                                     size={"small"}
                                     color={"primary"}
                                     checked={task.isDone}
-                                    onChange={(e) => {props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)}}
+                                    onChange={(e) => {
+                                        props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
+                                    }}
                                 />
-                                {/*<input type="checkbox"*/}
-                                {/*       checked={task.isDone}*/}
-                                {/*       onChange={(e) => {props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)}}*/}
-                                {/*/>*/}
+
                                 <EditableSpan
                                     title={task.title}
                                     changeValue={changeTaskTitle}
                                 />
-                                <IconButton onClick={() => {props.removeTask(task.id, props.id)}}>
+                                <IconButton onClick={() => {
+                                    props.removeTask(task.id, props.id)
+                                }}>
                                     <Delete/>
                                 </IconButton>
                                 {/*<button*/}
@@ -90,24 +91,27 @@ function ToDoList(props: PropsTypeToDoList) {
                     variant={props.filter === 'all' ? 'contained' : "outlined"}
                     color={"primary"}
                     // className={props.filter === 'all' ? 'active-filter' : ''}
-                    onClick={() => {props.changeFilter("all", props.id)
-                }}>All
+                    onClick={() => {
+                        props.changeFilter("all", props.id)
+                    }}>All
                 </Button>
                 <Button
                     size={"small"}
                     variant={props.filter === 'active' ? 'contained' : "outlined"}
                     color={"primary"}
                     // className={props.filter === 'active' ? 'active-filter' : ''}
-                    onClick={() => {props.changeFilter("active", props.id)
-                }}>Active
+                    onClick={() => {
+                        props.changeFilter("active", props.id)
+                    }}>Active
                 </Button>
                 <Button
                     size={"small"}
                     variant={props.filter === 'completed' ? 'contained' : "outlined"}
                     color={"primary"}
                     // className={props.filter ==='completed' ? 'active-filter': ''}
-                    onClick={() => {props.changeFilter("completed", props.id)
-                }}>Completed
+                    onClick={() => {
+                        props.changeFilter("completed", props.id)
+                    }}>Completed
                 </Button>
             </div>
         </div>
