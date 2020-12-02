@@ -1,4 +1,9 @@
-import {todoListsReducer} from './todolists-reducer';
+import {
+    AddTodolistActionType, ChangeTodolistFilterActionType,
+    ChangeTodolistTitleActionType,
+    RemoveTodolistActionType,
+    todoListsReducer
+} from './todolists-reducer';
 import {v1} from 'uuid';
 import {FilterValuesType, TodoListType} from "../App";
 
@@ -12,7 +17,7 @@ test('correct todolist should be removed', () => {
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
 
-    const action = { type: 'REMOVE-TODOLIST', id: todolistId1}
+    const action: RemoveTodolistActionType = { type: 'REMOVE-TODOLIST', id: todolistId1}
 
     const endState = todoListsReducer(startState, action)
 
@@ -31,7 +36,7 @@ test('correct todolist should be added', () => {
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
 
-    const action = { type: 'ADD-TODOLIST', title: newTodolistTitle}
+    const action: AddTodolistActionType = { type: 'ADD-TODOLIST', title: newTodolistTitle}
 
     const endState = todoListsReducer(startState, action)
 
@@ -50,7 +55,7 @@ test('correct todolist should change its name', () => {
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
 
-    const action = {
+    const action: ChangeTodolistTitleActionType = {
         type: 'CHANGE-TODOLIST-TITLE',
         id: todolistId2,
         title: newTodolistTitle
@@ -73,7 +78,7 @@ test('correct filter of todolist should be changed', () => {
         {id: todolistId2, title: "What to buy", filter: "all"}
     ]
 
-    const action = {
+    const action: ChangeTodolistFilterActionType = {
         type: 'CHANGE-TODOLIST-FILTER',
         id: todolistId2,
         filter: newFilter
