@@ -86,6 +86,7 @@ function AppWithReducers() {
 
     function removeTodoList(todoListID: string) {
         dispatchTodoLists(RemoveTodoListAC(todoListID))
+        dispatchTasks(RemoveTodoListAC(todoListID))
     }
 
     function changeTodoListTitle(title: string, todoListID: string) {
