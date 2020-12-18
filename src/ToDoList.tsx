@@ -77,9 +77,6 @@ function ToDoList(props: PropsTypeToDoList) {
                                 }}>
                                     <Delete/>
                                 </IconButton>
-                                {/*<button*/}
-                                {/*    onClick={() => {props.removeTask(task.id, props.id)}}>X*/}
-                                {/*</button>*/}
                             </li>
                         )
                     })

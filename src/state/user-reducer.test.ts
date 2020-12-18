@@ -7,7 +7,7 @@ test('user reducer should increment only age', () => {
         childrenCount: 2
     };
 
-    const action = { type: 'INCREMENT-AGE' }
+    const action = {type: 'INCREMENT-AGE'}
 
     const endState = userReducer(startState, action)
 
@@ -23,7 +23,7 @@ test('user reducer should increment only childrenCount', () => {
         childrenCount: 2
     };
 
-    const action = { type: 'INCREMENT-CHILDREN-COUNT' }
+    const action = {type: 'INCREMENT-CHILDREN-COUNT'}
 
     const endState = userReducer(startState, action)
 
@@ -41,7 +41,7 @@ test('user reducer should change of users', () => {
         childrenCount: 2
     };
 
-    const action = { type: 'CHANGE-NAME', name: 'Vasyli' }
+    const action = {type: 'CHANGE-NAME', name: 'Vasyli'}
 
     const endState = userReducer(startState, action)
 

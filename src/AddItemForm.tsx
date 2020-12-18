@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useState, KeyboardEvent} from "react";
-import {Button, TextField} from "@material-ui/core";
+import {TextField} from "@material-ui/core";
 import {IconButton} from "@material-ui/core";
 import {AddCircle} from "@material-ui/icons";
 
@@ -40,12 +40,6 @@ function AddItemForm(props: AddItemFormType) {
 
     return (
         <div>
-            {/*<input*/}
-            {/*    value={title}*/}
-            {/*    onChange={onTitleChangeHandler}*/}
-            {/*    onKeyPress={onKeyDownAddItem}*/}
-            {/*    className={error ? 'error' : ''}*/}
-            {/*/>*/}
             <TextField
                 variant={"outlined"}
                 value={title}
