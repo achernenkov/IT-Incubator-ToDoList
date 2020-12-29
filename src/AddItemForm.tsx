@@ -10,6 +10,8 @@ type AddItemFormType = {
 
 function AddItemForm(props: AddItemFormType) {
 
+    console.log('1')
+
 // state
 
     const [title, setTitle] = useState<string>('')
@@ -22,6 +24,7 @@ function AddItemForm(props: AddItemFormType) {
     }
 
     const onKeyDownAddItem = (event: KeyboardEvent<HTMLInputElement>) => {
+        if(error) setError(null)
         if (event.key === 'Enter') addItem()
     }
 
