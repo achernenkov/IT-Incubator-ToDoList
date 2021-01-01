@@ -6,6 +6,7 @@ import EditableSpan from "./EditableSpan";
 import {IconButton, Checkbox} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {Button} from "@material-ui/core";
+import Task from './Task'
 
 type PropsTypeToDoList = {
     id: string
@@ -73,26 +74,7 @@ const ToDoList = React.memo((props: PropsTypeToDoList) => {
                         }
 
                         return (
-                            <li key={task.id} className={task.isDone ? 'is-done' : ''}>
-                                <Checkbox
-                                    size={"small"}
-                                    color={"primary"}
-                                    checked={task.isDone}
-                                    onChange={(e) => {
-                                        props.changeTaskStatus(task.id, e.currentTarget.checked, props.id)
-                                    }}
-                                />
-
-                                <EditableSpan
-                                    title={task.title}
-                                    changeValue={changeTaskTitle}
-                                />
-                                <IconButton onClick={() => {
-                                    props.removeTask(task.id, props.id)
-                                }}>
-                                    <Delete/>
-                                </IconButton>
-                            </li>
+                           <Task />
                         )
                     })
                 }
