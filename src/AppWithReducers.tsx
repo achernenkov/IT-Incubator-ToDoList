@@ -45,38 +45,38 @@ function AppWithReducers() {
     // task
     const removeTask = useCallback((taskID: string, todoListID: string) => {
         dispatch(RemoveTaskAC(taskID, todoListID))
-    }, [])
+    }, [dispatch, RemoveTaskAC])
 
     const addTask = useCallback((title: string, todoListID: string) => {
         dispatch(addTaskAC(title, todoListID))
-    }, [])
+    }, [dispatch, addTaskAC])
 
     const changeTaskStatus = useCallback((taskID: string, isDone: boolean, todoListID: string) => {
         dispatch(ChangeTaskStatusAC(taskID, isDone, todoListID))
-    }, [])
+    }, [dispatch, ChangeTaskStatusAC])
 
     const changeTaskTitle = useCallback((taskID: string, title: string, todoListID: string) => {
         dispatch(ChangeTaskTitleAC(taskID, title, todoListID))
-    }, [])
+    }, [dispatch, ChangeTaskTitleAC])
 
     // todolist
 
     const changeFilter = useCallback((newFilterValue: FilterValuesType, todoListID: string) => {
         dispatch(ChangeTodolistFilterAC(todoListID, newFilterValue))
-    }, [])
+    }, [dispatch, ChangeTodolistFilterAC])
 
     const removeTodoList = useCallback((todoListID: string) => {
         dispatch(RemoveTodoListAC(todoListID))
-    }, [])
+    }, [dispatch, RemoveTodoListAC])
 
     const changeTodoListTitle = useCallback((title: string, todoListID: string) => {
         dispatch(ChangeTodolistTitleAC(todoListID, title))
-    }, [])
+    }, [dispatch, ChangeTodolistTitleAC])
 
     const addTodoList = useCallback((title: string) => {
         const action = AddTodolistAC(title)
         dispatch(action)
-    }, [])
+    }, [dispatch, AddTodolistAC])
 
 // JSX
 

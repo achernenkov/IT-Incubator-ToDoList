@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {TasksType, FilterValuesType} from './App'
+import {TasksType, FilterValuesType} from './AppOldVersion'
 import './App.css';
 import AddItemForm from "./AddItemForm";
 import EditableSpan from "./EditableSpan";
@@ -41,7 +41,6 @@ const ToDoList = React.memo((props: PropsTypeToDoList) => {
         <div>
             <h3>
                 <EditableSpan title={props.title} changeValue={changeTodoListTitle}/>
-                {/*<button onClick={removeTodoList}>X</button>*/}
                 <IconButton onClick={removeTodoList}>
                     <Delete/>
                 </IconButton>
@@ -87,7 +86,6 @@ const ToDoList = React.memo((props: PropsTypeToDoList) => {
                     size={"small"}
                     variant={props.filter === 'all' ? 'contained' : "outlined"}
                     color={"primary"}
-                    // className={props.filter === 'all' ? 'active-filter' : ''}
                     onClick={() => {
                         props.changeFilter("all", props.id)
                     }}>All
@@ -96,7 +94,6 @@ const ToDoList = React.memo((props: PropsTypeToDoList) => {
                     size={"small"}
                     variant={props.filter === 'active' ? 'contained' : "outlined"}
                     color={"primary"}
-                    // className={props.filter === 'active' ? 'active-filter' : ''}
                     onClick={() => {
                         props.changeFilter("active", props.id)
                     }}>Active
@@ -105,7 +102,6 @@ const ToDoList = React.memo((props: PropsTypeToDoList) => {
                     size={"small"}
                     variant={props.filter === 'completed' ? 'contained' : "outlined"}
                     color={"primary"}
-                    // className={props.filter ==='completed' ? 'active-filter': ''}
                     onClick={() => {
                         props.changeFilter("completed", props.id)
                     }}>Completed

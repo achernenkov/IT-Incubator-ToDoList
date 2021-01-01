@@ -24,7 +24,7 @@ export type TaskStateType = {
     [key: string]: Array<TasksType>
 }
 
-function App() {
+function AppOldVersion() {
 
 // state
 
@@ -181,4 +181,4 @@ function App() {
     );
 }
 
-export default App;
+export default AppOldVersion;

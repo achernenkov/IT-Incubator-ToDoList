@@ -1,4 +1,4 @@
-import {FilterValuesType, TodoListType} from "../App";
+import {FilterValuesType, TodoListType} from "../AppOldVersion";
 import {v1} from "uuid";
 
 type ActionType =
