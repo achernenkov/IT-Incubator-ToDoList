@@ -35,6 +35,16 @@ const ToDoList = React.memo((props: PropsTypeToDoList) => {
 
     const removeTodoList = () => props.removeTodoList(props.id)
 
+    let tasksForTodoList = props.tasks
+
+    if (props.filter === "active") {
+        tasksForTodoList = props.tasks.filter(task => !task.isDone)
+    }
+
+    if (props.filter === "completed") {
+        tasksForTodoList = props.tasks.filter(task => task.isDone)
+    }
+
 // JSX
 
     return (
@@ -50,7 +60,7 @@ const ToDoList = React.memo((props: PropsTypeToDoList) => {
 
             <ul style={{listStyle: 'none', padding: '0'}}>
                 {
-                    props.tasks.map(task => {
+                    tasksForTodoList.map(task => {
 
                         const changeTaskTitle = (newValue: string) => {
                             props.changeTaskTitle(task.id, newValue, props.id)

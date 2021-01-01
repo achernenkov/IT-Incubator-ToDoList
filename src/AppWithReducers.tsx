@@ -103,13 +103,6 @@ function AppWithReducers() {
 
                             let tasksForTodoList = tasks[tl.id]
 
-                            if (tl.filter === "active") {
-                                tasksForTodoList = tasks[tl.id].filter(task => !task.isDone)
-                            }
-
-                            if (tl.filter === "completed") {
-                                tasksForTodoList = tasks[tl.id].filter(task => task.isDone)
-                            }
 
                             return (
                                 <Grid item key={tl.id}>
