@@ -21,7 +21,7 @@ type PropsTypeToDoList = {
     changeTodoListTitle: (title: string, todoListID: string) => void
 }
 
-function ToDoList(props: PropsTypeToDoList) {
+const ToDoList = React.memo((props: PropsTypeToDoList) => {
 
 // function
 
@@ -113,6 +113,6 @@ function ToDoList(props: PropsTypeToDoList) {
             </div>
         </div>
     )
-}
+})
 
 export default ToDoList

@@ -8,9 +8,9 @@ type AddItemFormType = {
 
 }
 
-function AddItemForm(props: AddItemFormType) {
+let AddItemForm = React.memo((props: AddItemFormType) => {
 
-    console.log('1')
+    console.log('Перерисовка AddItemForm')
 
 // state
 
@@ -57,6 +57,6 @@ function AddItemForm(props: AddItemFormType) {
             </IconButton>
         </div>
     )
-}
+})
 
 export default AddItemForm;
