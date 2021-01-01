@@ -9,9 +9,6 @@ type AddItemFormType = {
 }
 
 let AddItemForm = React.memo((props: AddItemFormType) => {
-
-    console.log('Перерисовка AddItemForm')
-
 // state
 
     const [title, setTitle] = useState<string>('')

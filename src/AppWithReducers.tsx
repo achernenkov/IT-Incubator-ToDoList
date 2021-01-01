@@ -33,9 +33,6 @@ export type TaskStateType = {
 }
 
 function AppWithReducers() {
-
-    console.log('Перерисовка APP')
-
 // state
 
     let todoLists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)

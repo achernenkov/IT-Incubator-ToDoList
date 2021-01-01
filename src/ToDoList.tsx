@@ -55,17 +55,17 @@ const ToDoList = React.memo((props: PropsTypeToDoList) => {
 
     // for Task components
 
-    const removeTaskHandler = (taskID: string) => {
+    const removeTaskHandler = useCallback((taskID: string) => {
         props.removeTask(taskID, props.id )
-    }
+    }, [props.id, props.removeTask])
 
-    const changeTaskStatusHandler = (taskID: string, isDone: boolean) => {
+    const changeTaskStatusHandler = useCallback((taskID: string, isDone: boolean) => {
         props.changeTaskStatus(taskID, isDone, props.id)
-    }
+    }, [props.id, props.changeTaskStatus])
 
-    const changeTaskTitleHandler = (taskID: string, newValue: string) => {
+    const changeTaskTitleHandler = useCallback((taskID: string, newValue: string) => {
         props.changeTaskTitle(taskID, newValue, props.id)
-    }
+    }, [props.id, props.changeTaskTitle])
 
     // end for task components
 // JSX
