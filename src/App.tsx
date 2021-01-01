@@ -10,7 +10,7 @@ import {
     ChangeTodolistTitleAC,
     RemoveTodoListAC,
 } from "./state/todolists-reducer";
-import {addTaskAC, ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC, tasksReducer} from "./state/tasks-reducer";
+import {addTaskAC, ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
 
@@ -32,7 +32,7 @@ export type TaskStateType = {
     [key: string]: Array<TasksType>
 }
 
-function AppWithReducers() {
+function App() {
 // state
 
     let todoLists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)
@@ -98,31 +98,30 @@ function AppWithReducers() {
                     {
                         todoLists.map(tl => {
 
-                            let tasksForTodoList = tasks[tl.id]
+                                let tasksForTodoList = tasks[tl.id]
 
 
-                            return (
-                                <Grid item key={tl.id}>
-                                    <Paper elevation={5} style={{padding: '2px 20px 20px 20px'}}>
-                                        <ToDoList
-                                            key={tl.id}
-                                            id={tl.id}
-                                            title={tl.title}
-                                            tasks={tasksForTodoList}
-                                            filter={tl.filter}
-                                            removeTask={removeTask}
-                                            changeFilter={changeFilter}
-                                            addTask={addTask}
-                                            changeTaskStatus={changeTaskStatus}
-                                            removeTodoList={removeTodoList}
-                                            changeTaskTitle={changeTaskTitle}
-                                            changeTodoListTitle={changeTodoListTitle}
-                                        />
-                                    </Paper>
-                                </Grid>
-                            )
-                        }
-                    )
+                                return (
+                                    <Grid item>
+                                        <Paper elevation={5} style={{padding: '2px 20px 20px 20px'}}>
+                                            <ToDoList
+                                                id={tl.id}
+                                                title={tl.title}
+                                                tasks={tasksForTodoList}
+                                                filter={tl.filter}
+                                                removeTask={removeTask}
+                                                changeFilter={changeFilter}
+                                                _addTask={addTask}
+                                                changeTaskStatus={changeTaskStatus}
+                                                _removeTodoList={removeTodoList}
+                                                changeTaskTitle={changeTaskTitle}
+                                                _changeTodoListTitle={changeTodoListTitle}
+                                            />
+                                        </Paper>
+                                    </Grid>
+                                )
+                            }
+                        )
                     }
                 </Grid>
             </Container>
@@ -130,4 +129,4 @@ function AppWithReducers() {
     );
 }
 
-export default AppWithReducers;
+export default App;

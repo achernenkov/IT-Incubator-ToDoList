@@ -2,7 +2,7 @@ import {Checkbox, IconButton} from "@material-ui/core";
 import EditableSpan from "./EditableSpan";
 import {Delete} from "@material-ui/icons";
 import React from "react";
-import {TasksType} from "./AppWithReducers";
+import {TasksType} from "./App";
 
 type TaskPropsType = {
     task: TasksType
@@ -11,8 +11,8 @@ type TaskPropsType = {
     changeTaskTitleHandler: (taskID: string, newValue: string) => void
 }
 
-const Task: React.FC<TaskPropsType> = React.memo(({task, removeTaskHandler, changeTaskStatusHandler,changeTaskTitleHandler}) => {
-    return(
+const Task: React.FC<TaskPropsType> = React.memo(({task, removeTaskHandler, changeTaskStatusHandler, changeTaskTitleHandler}) => {
+    return (
         <div key={task.id} className={task.isDone ? 'is-done' : ''}>
             <Checkbox
                 size={"small"}
