@@ -32,7 +32,7 @@ export type TaskStateType = {
     [key: string]: Array<TasksType>
 }
 
-function App() {
+const App:React.FC = () => {
 // state
 
     let todoLists = useSelector<AppRootStateType, Array<TodoListType>>(state => state.todolists)
