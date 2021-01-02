@@ -4,7 +4,7 @@ import {Delete} from "@material-ui/icons";
 import React from "react";
 import {TasksType} from "./App";
 
-type TaskPropsType = {
+export type TaskPropsType = {
     task: TasksType
     removeTaskHandler: (taskID: string) => void
     changeTaskStatusHandler: (taskID: string, isDone: boolean) => void
