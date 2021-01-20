@@ -7,7 +7,7 @@ import {Menu} from "@material-ui/icons";
 import {
     AddTodolistAC,
     ChangeTodolistFilterAC,
-    ChangeTodolistTitleAC,
+    ChangeTodolistTitleAC, fetchTodolistsTC,
     RemoveTodoListAC,
 } from "./state/todolists-reducer";
 import {addTaskAC, ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC} from "./state/tasks-reducer";
@@ -75,6 +75,11 @@ const App:React.FC = () => {
         const action = AddTodolistAC(title)
         dispatch(action)
     }, [dispatch, AddTodolistAC])
+
+    useEffect(()=>{
+        debugger
+        dispatch(fetchTodolistsTC())
+    },[])
 
 // JSX
 
