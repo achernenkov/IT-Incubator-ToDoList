@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {TasksType, FilterValuesType} from './App'
 import './App.css';
 import AddItemForm from "./AddItemForm";
@@ -7,6 +7,9 @@ import {IconButton, Checkbox} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {Button} from "@material-ui/core";
 import Task from './Task'
+import dispatch from './App'
+import {useDispatch} from "react-redux";
+import { fetchTasksTC } from "./state/tasks-reducer";
 
 type PropsTypeToDoList = {
     id: string
@@ -37,6 +40,8 @@ const ToDoList: React.FC<PropsTypeToDoList> = React.memo(({
                                                           }) => {
 
 // function
+
+    let dispatch = useDispatch()
 
     const addTask = useCallback((title: string) => {
         _addTask(title, id)
@@ -76,6 +81,9 @@ const ToDoList: React.FC<PropsTypeToDoList> = React.memo(({
         tasksForTodoList = tasks.filter(task => task.isDone)
     }
 
+    useEffect(() => {
+        dispatch(fetchTasksTC(id))
+    }, [])
 // JSX
 
     return (

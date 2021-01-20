@@ -13,7 +13,7 @@ import {
 import {addTaskAC, ChangeTaskStatusAC, ChangeTaskTitleAC, RemoveTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
-import {todolistsAPI} from "./api/todolists-api";
+import {TaskType, todolistsAPI} from "./api/todolists-api";
 
 export type TasksType = {
     id: string
@@ -77,7 +77,6 @@ const App:React.FC = () => {
     }, [dispatch, AddTodolistAC])
 
     useEffect(()=>{
-        debugger
         dispatch(fetchTodolistsTC())
     },[])
 
