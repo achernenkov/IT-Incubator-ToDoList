@@ -17,7 +17,6 @@ type PropsTypeToDoList = {
     title: string
     tasks: Array<TaskType>
     _addTask: (title: string, todoListID: string) => void
-    removeTask: (taskID: string, todoListID: string) => void
     changeFilter: (newFilterValue: FilterValuesType, todoListID: string) => void
     changeTaskStatus: (taskID: string, isDone: TaskStatuses, todoListID: string) => void
     filter: FilterValuesType
@@ -31,7 +30,6 @@ const ToDoList: React.FC<PropsTypeToDoList> = React.memo(({
                                                               title,
                                                               tasks,
                                                               _addTask,
-                                                              removeTask,
                                                               changeFilter,
                                                               changeTaskStatus,
                                                               filter,
@@ -61,8 +59,8 @@ const ToDoList: React.FC<PropsTypeToDoList> = React.memo(({
     const onCompletedClickHandler = useCallback(() => changeFilter("completed", id), [changeFilter, id])
 
     const removeTaskHandler = useCallback((taskID: string) => {
-        dispatch(removeTaskTC(taskID, id)) // Сервера выдает 500, разобраться.
-    }, [id, removeTask])
+        dispatch(removeTaskTC(taskID, id))
+    }, [id, removeTaskTC])
 
     const changeTaskStatusHandler = useCallback((taskID: string, isDone: TaskStatuses) => {
         changeTaskStatus(taskID, isDone, id)

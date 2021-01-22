@@ -1,12 +1,11 @@
-import {TaskStateType, TasksType} from "./../App";
-import {v1} from "uuid";
+import {TaskStateType} from "./../App";
 import {AddTodolistActionType, RemoveTodolistActionType, SetTodolistsActionType} from "./todolists-reducer";
-import {TaskPriorities, TaskStatuses, TaskType, todolistsAPI} from "../api/todolists-api";
+import {TaskStatuses, TaskType, todolistsAPI} from "../api/todolists-api";
 import {Dispatch} from "redux";
 import {AppRootStateType} from "./store";
 
-type ActionType = RemoveTaskType
-    | addTaskACType
+type ActionType = RemoveTaskACType
+    | AddTaskACType
     | ChangeTaskStatusACType
     | ChangeTaskTitleACType
     | RemoveTodolistActionType
@@ -14,30 +13,13 @@ type ActionType = RemoveTaskType
     | SetTodolistsActionType
     | SetTasksActionType
 
-export type RemoveTaskType = {
-    type: 'REMOVE-TASK'
-    taskID: string
-    todoListID: string
-}
+export type RemoveTaskACType = ReturnType<typeof removeTaskAC>
 
-export type addTaskACType = {
-    type: 'ADD-TASK'
-    task: TaskType
-}
+export type AddTaskACType = ReturnType<typeof addTaskAC>
 
-export type ChangeTaskStatusACType = {
-    type: "CHANGE-TASK-STATUS"
-    taskID: string
-    status: TaskStatuses
-    todoListID: string
-}
+export type ChangeTaskStatusACType = ReturnType<typeof changeTaskStatusAC>
 
-export type ChangeTaskTitleACType = {
-    type: "CHANGE-TASK-TITLE",
-    taskID: string,
-    taskTitle: string
-    todoListID: string
-}
+export type ChangeTaskTitleACType = ReturnType<typeof changeTaskTitleAC>
 
 export type SetTasksActionType = ReturnType<typeof setTasksAC>
 
@@ -100,26 +82,26 @@ export const tasksReducer = (state: TaskStateType = initialState, action: Action
     }
 }
 
-export const RemoveTaskAC = (taskID: string, todoListID: string): RemoveTaskType => ({
+export const removeTaskAC = (taskID: string, todoListID: string) => ({
     type: 'REMOVE-TASK',
     taskID: taskID,
     todoListID: todoListID
-})
-export const addTaskAC = (task: TaskType): addTaskACType => ({type: 'ADD-TASK', task})
+} as const)
+export const addTaskAC = (task: TaskType) => ({type: 'ADD-TASK', task} as const)
 
-export const ChangeTaskStatusAC = (taskID: string, status: TaskStatuses, todoListID: string): ChangeTaskStatusACType => ({
+export const changeTaskStatusAC = (taskID: string, status: TaskStatuses, todoListID: string) => ({
     type: "CHANGE-TASK-STATUS",
     taskID,
     status,
     todoListID
-})
+} as const)
 
-export const ChangeTaskTitleAC = (taskID: string, taskTitle: string, todoListID: string): ChangeTaskTitleACType => ({
+export const changeTaskTitleAC = (taskID: string, taskTitle: string, todoListID: string) => ({
     type: "CHANGE-TASK-TITLE",
     taskID,
     taskTitle,
     todoListID
-})
+} as const)
 
 const setTasksAC = (tasks: Array<TaskType>, todolistID: string) => ({type: 'SET-TASKS', tasks, todolistID} as const)
 
@@ -134,7 +116,7 @@ export const fetchTasksTC = (todolistID: string) => (dispatch: Dispatch) => {
 
 export const removeTaskTC = (taskID: string, todolistID: string) => (dispatch: Dispatch) => {
     todolistsAPI.deleteTask(todolistID, taskID).then(res => {
-        dispatch(RemoveTaskAC(taskID, todolistID))
+        dispatch(removeTaskAC(taskID, todolistID))
     })
 }
 
@@ -158,7 +140,7 @@ export const renameTaskTS = (todolistid: string, taskid:string, title: string) =
             deadline: task.deadline,
             status: task.status
         }).then(res => {
-            dispatch(ChangeTaskTitleAC(taskid,title,todolistid))
+            dispatch(changeTaskTitleAC(taskid,title,todolistid))
         })
     }
 }
@@ -177,7 +159,7 @@ export const changeTaskStatusTS = (todolistid: string, taskid:string, status: Ta
             deadline: task.deadline,
             status: status
         }).then(res => {
-            dispatch(ChangeTaskStatusAC(taskid,status,todolistid))
+            dispatch(changeTaskStatusAC(taskid,status,todolistid))
         })
     }
 }
