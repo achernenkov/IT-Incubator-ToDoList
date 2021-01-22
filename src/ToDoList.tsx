@@ -9,12 +9,13 @@ import {Button} from "@material-ui/core";
 import Task from './Task'
 import dispatch from './App'
 import {useDispatch} from "react-redux";
-import { fetchTasksTC } from "./state/tasks-reducer";
+import { fetchTasksTC, removeTaskTC } from "./state/tasks-reducer";
+import {TaskStatuses, TaskType} from "./api/todolists-api";
 
 type PropsTypeToDoList = {
     id: string
     title: string
-    tasks: Array<TasksType>
+    tasks: Array<TaskType>
     _addTask: (title: string, todoListID: string) => void
     removeTask: (taskID: string, todoListID: string) => void
     changeFilter: (newFilterValue: FilterValuesType, todoListID: string) => void
@@ -60,7 +61,7 @@ const ToDoList: React.FC<PropsTypeToDoList> = React.memo(({
     const onCompletedClickHandler = useCallback(() => changeFilter("completed", id), [changeFilter, id])
 
     const removeTaskHandler = useCallback((taskID: string) => {
-        removeTask(taskID, id)
+        dispatch(removeTaskTC(taskID, id)) // Сервера выдает 500, разобраться.
     }, [id, removeTask])
 
     const changeTaskStatusHandler = useCallback((taskID: string, isDone: boolean) => {
@@ -74,11 +75,11 @@ const ToDoList: React.FC<PropsTypeToDoList> = React.memo(({
     let tasksForTodoList = tasks
 
     if (filter === "active") {
-        tasksForTodoList = tasks.filter(task => !task.isDone)
+        tasksForTodoList = tasks.filter(task => task.status === TaskStatuses.New)
     }
 
     if (filter === "completed") {
-        tasksForTodoList = tasks.filter(task => task.isDone)
+        tasksForTodoList = tasks.filter(task => task.status === TaskStatuses.Completed)
     }
 
     useEffect(() => {

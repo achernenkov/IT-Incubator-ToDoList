@@ -30,7 +30,7 @@ export type TodoListType = {
 }
 
 export type TaskStateType = {
-    [key: string]: Array<TasksType>
+    [key: string]: Array<TaskType>
 }
 
 const App:React.FC = () => {

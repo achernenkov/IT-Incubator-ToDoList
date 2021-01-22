@@ -3,9 +3,10 @@ import EditableSpan from "./EditableSpan";
 import {Delete} from "@material-ui/icons";
 import React from "react";
 import {TasksType} from "./App";
+import {TaskStatuses, TaskType} from "./api/todolists-api";
 
 export type TaskPropsType = {
-    task: TasksType
+    task: TaskType
     removeTaskHandler: (taskID: string) => void
     changeTaskStatusHandler: (taskID: string, isDone: boolean) => void
     changeTaskTitleHandler: (taskID: string, newValue: string) => void
@@ -13,11 +14,11 @@ export type TaskPropsType = {
 
 const Task: React.FC<TaskPropsType> = React.memo(({task, removeTaskHandler, changeTaskStatusHandler, changeTaskTitleHandler}) => {
     return (
-        <div key={task.id} className={task.isDone ? 'is-done' : ''}>
+        <div key={task.id} className={task.status === TaskStatuses.Completed ? 'is-done' : ''}>
             <Checkbox
                 size={"small"}
                 color={"primary"}
-                checked={task.isDone}
+                checked={task.status === TaskStatuses.Completed}
                 onChange={(e) => {
                     changeTaskStatusHandler(task.id, e.currentTarget.checked)
                 }}
