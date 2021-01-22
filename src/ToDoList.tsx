@@ -19,7 +19,7 @@ type PropsTypeToDoList = {
     _addTask: (title: string, todoListID: string) => void
     removeTask: (taskID: string, todoListID: string) => void
     changeFilter: (newFilterValue: FilterValuesType, todoListID: string) => void
-    changeTaskStatus: (taskID: string, isDone: boolean, todoListID: string) => void
+    changeTaskStatus: (taskID: string, isDone: TaskStatuses, todoListID: string) => void
     filter: FilterValuesType
     _removeTodoList: (todoListID: string) => void
     changeTaskTitle: (taskID: string, title: string, todoListID: string) => void
@@ -64,7 +64,7 @@ const ToDoList: React.FC<PropsTypeToDoList> = React.memo(({
         dispatch(removeTaskTC(taskID, id)) // Сервера выдает 500, разобраться.
     }, [id, removeTask])
 
-    const changeTaskStatusHandler = useCallback((taskID: string, isDone: boolean) => {
+    const changeTaskStatusHandler = useCallback((taskID: string, isDone: TaskStatuses) => {
         changeTaskStatus(taskID, isDone, id)
     }, [id, changeTaskStatus])
 

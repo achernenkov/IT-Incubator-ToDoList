@@ -2,13 +2,12 @@ import {Checkbox, IconButton} from "@material-ui/core";
 import EditableSpan from "./EditableSpan";
 import {Delete} from "@material-ui/icons";
 import React from "react";
-import {TasksType} from "./App";
 import {TaskStatuses, TaskType} from "./api/todolists-api";
 
 export type TaskPropsType = {
     task: TaskType
     removeTaskHandler: (taskID: string) => void
-    changeTaskStatusHandler: (taskID: string, isDone: boolean) => void
+    changeTaskStatusHandler: (taskID: string, isDone: TaskStatuses) => void
     changeTaskTitleHandler: (taskID: string, newValue: string) => void
 }
 
@@ -20,7 +19,7 @@ const Task: React.FC<TaskPropsType> = React.memo(({task, removeTaskHandler, chan
                 color={"primary"}
                 checked={task.status === TaskStatuses.Completed}
                 onChange={(e) => {
-                    changeTaskStatusHandler(task.id, e.currentTarget.checked)
+                    changeTaskStatusHandler(task.id, e.currentTarget.checked ? TaskStatuses.Completed : TaskStatuses.New)
                 }}
             />
 

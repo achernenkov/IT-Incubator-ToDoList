@@ -13,14 +13,14 @@ import {
 import {
     addTaskAC,
     addTaskTS,
-    ChangeTaskStatusAC,
+    ChangeTaskStatusAC, changeTaskStatusTS,
     ChangeTaskTitleAC,
     RemoveTaskAC,
     renameTaskTS
 } from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
-import {TaskType, todolistsAPI} from "./api/todolists-api";
+import {TaskStatuses, TaskType, todolistsAPI} from "./api/todolists-api";
 
 export type TasksType = {
     id: string
@@ -56,8 +56,8 @@ const App:React.FC = () => {
         dispatch(addTaskTS(todoListID, title))
     }, [dispatch, addTaskAC])
 
-    const changeTaskStatus = useCallback((taskID: string, isDone: boolean, todoListID: string) => {
-        dispatch(ChangeTaskStatusAC(taskID, isDone, todoListID))
+    const changeTaskStatus = useCallback((taskID: string, isDone: TaskStatuses, todoListID: string) => {
+        dispatch(changeTaskStatusTS(todoListID, taskID, isDone))
     }, [dispatch, ChangeTaskStatusAC])
 
     const changeTaskTitle = useCallback((taskID: string, title: string, todoListID: string) => {
