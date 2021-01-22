@@ -7,7 +7,7 @@ import {Menu} from "@material-ui/icons";
 import {
     AddTodolistAC,
     ChangeTodolistFilterAC,
-    ChangeTodolistTitleAC, fetchTodolistsTC,
+    ChangeTodolistTitleAC, createTodoListTC, deleteTodoListTC, fetchTodolistsTC,
     RemoveTodoListAC,
 } from "./state/todolists-reducer";
 import {
@@ -71,17 +71,16 @@ const App:React.FC = () => {
     }, [dispatch, ChangeTodolistFilterAC])
 
     const removeTodoList = useCallback((todoListID: string) => {
-        dispatch(RemoveTodoListAC(todoListID))
-    }, [dispatch, RemoveTodoListAC])
+        dispatch(deleteTodoListTC(todoListID))
+    }, [dispatch, deleteTodoListTC])
 
     const changeTodoListTitle = useCallback((title: string, todoListID: string) => {
         dispatch(ChangeTodolistTitleAC(todoListID, title))
     }, [dispatch, ChangeTodolistTitleAC])
 
     const addTodoList = useCallback((title: string) => {
-        const action = AddTodolistAC(title)
-        dispatch(action)
-    }, [dispatch, AddTodolistAC])
+        dispatch(createTodoListTC(title))
+    }, [dispatch, createTodoListTC])
 
     useEffect(()=>{
         dispatch(fetchTodolistsTC())

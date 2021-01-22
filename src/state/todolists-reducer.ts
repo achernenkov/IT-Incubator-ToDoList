@@ -17,8 +17,7 @@ export type RemoveTodolistActionType = {
 
 export type AddTodolistActionType = {
     type: 'ADD-TODOLIST'
-    title: string
-    todolistID: string
+    todolist: TodolistType;
 }
 
 export type ChangeTodolistTitleActionType = {
@@ -48,9 +47,7 @@ export const todoListsReducer = (state: Array<TodoListType> = initialState, acti
         case 'REMOVE-TODOLIST':
             return state.filter(tl => tl.id !== action.id)
         case 'ADD-TODOLIST' :
-            const newTodoListID: string = action.todolistID
-            const newTodoList: TodoListType = {id: newTodoListID, title: action.title, filter: "all"}
-            return [...state, newTodoList]
+                return [{...action.todolist, filter: "all"},...state]
         case 'CHANGE-TODOLIST-TITLE':
             const task = state.find(task => task.id === action.id)
             if (task) {
@@ -74,10 +71,9 @@ export const RemoveTodoListAC = (todoListID: string): RemoveTodolistActionType =
     type: 'REMOVE-TODOLIST',
     id: todoListID
 })
-export const AddTodolistAC = (title: string): AddTodolistActionType => ({
+export const AddTodolistAC = (todolist: TodolistType): AddTodolistActionType => ({
     type: "ADD-TODOLIST",
-    title: title,
-    todolistID: v1()
+    todolist
 })
 export const ChangeTodolistTitleAC = (todoListID: string, title: string): ChangeTodolistTitleActionType => ({
     type: "CHANGE-TODOLIST-TITLE",
@@ -101,5 +97,17 @@ export const setTodolistsAC = (todolists: Array<TodolistType>)=> {
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
     todolistsAPI.getTodolists().then(res => {
         dispatch(setTodolistsAC(res.data))
+    })
+}
+
+export const createTodoListTC = (title:string) => (dispatch: Dispatch) => {
+    todolistsAPI.createTodolist(title).then(res => {
+        dispatch(AddTodolistAC(res.data.data.item))
+    })
+}
+
+export const deleteTodoListTC = (todolistID: string) => (dispatch: Dispatch) =>{
+    todolistsAPI.deleteTodolist(todolistID).then(res => {
+        dispatch(RemoveTodoListAC(todolistID))
     })
 }
